@@ -8,27 +8,58 @@ enciendes o apagas unos auriculares Bluetooth (p. ej. Sennheiser MOMENTUM 4):
 
 Funciona en Windows 10/11, sin permisos de administrador.
 
-## Instalación en un ordenador nuevo
+## Puesta en marcha en un PC nuevo
 
-1. Empareja los auriculares por Bluetooth y **déjalos encendidos**.
-2. Abre PowerShell en esta carpeta y ejecuta:
+1. **Empareja los auriculares** por Bluetooth en Windows y **déjalos encendidos**
+   (si no, el instalador no podrá verlos en la lista).
+
+2. **Descarga el repo.** Al ser privado hay que iniciar sesión en GitHub primero.
+   Abre PowerShell y ejecuta:
+
+   ```powershell
+   winget install GitHub.cli          # si no tienes gh instalado
+   gh auth login --web                # inicia sesión con tu cuenta (ikerlorente11)
+   gh repo clone ikerlorente11/audio-autoswitch
+   cd audio-autoswitch
+   ```
+
+   > Si acabas de instalar `gh` y no se reconoce el comando, cierra y vuelve a
+   > abrir PowerShell, o usa la ruta completa: `& "C:\Program Files\GitHub CLI\gh.exe"`.
+
+3. **Ejecuta el instalador:**
 
    ```powershell
    powershell -ExecutionPolicy Bypass -File .\install.ps1
    ```
 
-3. Elige en el menú: auriculares, su micrófono, y los altavoces/micrófono de respaldo.
+4. **Elige en el menú** (escribiendo el número de cada dispositivo):
+   - Los auriculares Bluetooth (salida de sonido).
+   - Su micrófono (o `0` para no cambiar el micro al encenderlos).
+   - Los altavoces de respaldo (a los que volver al apagarlos).
+   - El micrófono de respaldo, p. ej. el de la webcam (o `0` para no cambiarlo).
 
-El instalador:
-- Instala el módulo [AudioDeviceCmdlets](https://github.com/frgnca/AudioDeviceCmdlets) (solo para tu usuario).
-- Copia el vigilante a `%LOCALAPPDATA%\AudioAutoSwitch` con tu configuración (`config.json`).
-- Crea la tarea programada **AudioAutoSwitch**, que arranca oculta al iniciar sesión.
+Y listo: queda funcionando desde ese momento y se arranca solo (oculto) cada
+vez que inicies sesión en Windows. Puedes borrar la carpeta clonada si quieres;
+la instalación queda copiada en `%LOCALAPPDATA%\AudioAutoSwitch`.
+
+El instalador también instala automáticamente el módulo
+[AudioDeviceCmdlets](https://github.com/frgnca/AudioDeviceCmdlets) si falta
+(solo para tu usuario) y crea la tarea programada **AudioAutoSwitch**.
+
+## Cambiar de auriculares o de altavoces
+
+Vuelve a ejecutar `install.ps1`: sobrescribe la configuración y la tarea con lo
+que elijas de nuevo.
 
 ## Desinstalar
+
+Desde la carpeta del repo:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\uninstall.ps1
 ```
+
+Elimina la tarea programada y la carpeta `%LOCALAPPDATA%\AudioAutoSwitch`.
 
 ## Cómo funciona
 
@@ -38,7 +69,8 @@ de audio de los auriculares en el registro de Windows
 o deja de estarlo, cambia el dispositivo predeterminado y el de comunicaciones
 con `Set-AudioDevice`. El consumo de CPU es despreciable.
 
-Registro de actividad: `%LOCALAPPDATA%\AudioAutoSwitch\AudioAutoSwitch.log`.
+- Registro de actividad: `%LOCALAPPDATA%\AudioAutoSwitch\AudioAutoSwitch.log`
+- Configuración: `%LOCALAPPDATA%\AudioAutoSwitch\config.json`
 
 ## Archivos
 
