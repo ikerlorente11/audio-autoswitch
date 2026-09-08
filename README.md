@@ -13,18 +13,14 @@ Funciona en Windows 10/11, sin permisos de administrador.
 1. **Empareja los auriculares** por Bluetooth en Windows y **déjalos encendidos**
    (si no, el instalador no podrá verlos en la lista).
 
-2. **Descarga el repo.** Al ser privado hay que iniciar sesión en GitHub primero.
-   Abre PowerShell y ejecuta:
+2. **Descarga el repo.** Abre PowerShell y ejecuta:
 
    ```powershell
-   winget install GitHub.cli          # si no tienes gh instalado
-   gh auth login --web                # inicia sesión con tu cuenta (ikerlorente11)
-   gh repo clone ikerlorente11/audio-autoswitch
+   git clone https://github.com/ikerlorente11/audio-autoswitch.git
    cd audio-autoswitch
    ```
 
-   > Si acabas de instalar `gh` y no se reconoce el comando, cierra y vuelve a
-   > abrir PowerShell, o usa la ruta completa: `& "C:\Program Files\GitHub CLI\gh.exe"`.
+   (o descarga el ZIP desde GitHub con el botón *Code → Download ZIP* y descomprímelo).
 
 3. **Ejecuta el instalador:**
 
