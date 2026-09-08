@@ -75,3 +75,8 @@ con `Set-AudioDevice`. El consumo de CPU es despreciable.
 | `install.ps1` | Instalador interactivo (elige dispositivos, crea la tarea) |
 | `AudioAutoSwitch.ps1` | El vigilante (se copia a `%LOCALAPPDATA%` al instalar) |
 | `uninstall.ps1` | Elimina la tarea y la carpeta instalada |
+
+## Licencia
+
+Puedes usar, modificar y compartir este proyecto libremente para fines **no comerciales**.
+No está permitido venderlo ni ganar dinero con él. Ver [LICENSE](LICENSE) (PolyForm Noncommercial 1.0.0).
